@@ -95,47 +95,47 @@ function! s:GetParagraphRange(line,innerOrOuter)
     return startLine . "," . endLine
 endfunction
 
-nnoremap <silent> <Plug>MagneditDeleteLineDown             :<C-U>call s:EditCode(v:count,"down","line","d")<CR>
-nnoremap <silent> <Plug>MagneditDeleteLineUp               :<C-U>call s:EditCode(v:count,"up","line","d")<CR>
-nnoremap <silent> <Plug>MagneditDeleteParagraphDown        :<C-U>call s:EditCode(v:count,"down","outerparagraph","d")<CR>
-nnoremap <silent> <Plug>MagneditDeleteParagraphUp          :<C-U>call s:EditCode(v:count,"up","outerparagraph","d")<CR>
-nnoremap <silent> <Plug>MagneditCopyLineDown               :<C-U>call s:EditCode(v:count,"down","line","y")<CR>
-nnoremap <silent> <Plug>MagneditCopyLineUp                 :<C-U>call s:EditCode(v:count,"up","line","y")<CR>
-nnoremap <silent> <Plug>MagneditCopyParagraphDown          :<C-U>call s:EditCode(v:count,"down","outerparagraph","y")<CR>
-nnoremap <silent> <Plug>MagneditCopyParagraphUp            :<C-U>call s:EditCode(v:count,"up","outerparagraph","y")<CR>
-nnoremap <silent> <Plug>MagneditInsertEmptyLineDown        :<C-U>call s:EditCode(v:count,"down","line","pu! _")<CR>
-nnoremap <silent> <Plug>MagneditInsertEmptyLineUp          :<C-U>call s:EditCode(v:count,"up","line","pu! _")<CR>
-nnoremap <silent> <Plug>MagneditPasteDown                  :<C-U>call s:EditCode(v:count,"down","line","pu")<CR>
-nnoremap <silent> <Plug>MagneditPasteUp                    :<C-U>call s:EditCode(v:count,"up","line","pu")<CR>
-nnoremap <silent> <Plug>MagneditCommentLineDown            :<C-U>call s:EditCodeWithNormalMode(v:count,"down","gcc")<CR>
-nnoremap <silent> <Plug>MagneditCommentLineUp              :<C-U>call s:EditCodeWithNormalMode(v:count,"up","gcc")<CR>
-nnoremap <silent> <Plug>MagneditCommentParagraphDown       :<C-U>call s:EditCodeWithNormalMode(v:count,"down","gcap")<CR>
-nnoremap <silent> <Plug>MagneditCommentParagraphUp         :<C-U>call s:EditCodeWithNormalMode(v:count,"up","gcap")<CR>
-
-nnoremap <silent> <Plug>MagneditMoveLineDownHere           :<C-U>call s:EditCode(v:count,"down","line","m.")<CR>
-nnoremap <silent> <Plug>MagneditMoveLineUpHere             :<C-U>call s:EditCode(v:count,"up","line","m.")<CR>
-nnoremap <silent> <Plug>MagneditMoveParagraphDownHere      :<C-U>call s:EditCode(v:count,"down","outerparagraph","m.")<CR>
-nnoremap <silent> <Plug>MagneditMoveParagraphUpHere        :<C-U>call s:EditCode(v:count,"up","outerparagraph","m.")<CR>
-
-nnoremap <silent> <Plug>MagneditCopyLineDownHere           :<C-U>call s:EditCode(v:count,"down","line","co.")<CR>
-nnoremap <silent> <Plug>MagneditCopyLineUpHere             :<C-U>call s:EditCode(v:count,"up","line","co.")<CR>
-nnoremap <silent> <Plug>MagneditCopyParagraphDownHere      :<C-U>call s:EditCode(v:count,"down","outerparagraph","co.")<CR>
-nnoremap <silent> <Plug>MagneditCopyParagraphUpHere        :<C-U>call s:EditCode(v:count,"up","outerparagraph","co.")<CR>
-
-nnoremap <silent> <Plug>MagneditMoveCurrentLineDown        :<C-U>call s:EditCodeFromCurrentPosition(v:count,"down","line","m")<CR>
-nnoremap <silent> <Plug>MagneditMoveCurrentLineUp          :<C-U>call s:EditCodeFromCurrentPosition(v:count,"up","line","m")<CR>
-nnoremap <silent> <Plug>MagneditMoveCurrentParagraphDown   :<C-U>call s:EditCodeFromCurrentPosition(v:count,"down","outerparagraph","m")<CR>
-nnoremap <silent> <Plug>MagneditMoveCurrentParagraphUp     :<C-U>call s:EditCodeFromCurrentPosition(v:count,"up","outerparagraph","m")<CR>
-                                                            
-nnoremap <silent> <Plug>MagneditCopyCurrentLineDown        :<C-U>call s:EditCodeFromCurrentPosition(v:count,"down","line","co")<CR>
-nnoremap <silent> <Plug>MagneditCopyCurrentLineUp          :<C-U>call s:EditCodeFromCurrentPosition(v:count,"up","line","co")<CR>
-nnoremap <silent> <Plug>MagneditCopyCurrentParagraphDown   :<C-U>call s:EditCodeFromCurrentPosition(v:count,"down","outerparagraph","co")<CR>
-nnoremap <silent> <Plug>MagneditCopyCurrentParagraphUp     :<C-U>call s:EditCodeFromCurrentPosition(v:count,"up","outerparagraph","co")<CR>
-
-vnoremap <silent> <Plug>MagneditMoveVisualDown             :<C-U>call s:EditCodeFromCurrentPosition(v:count,"down","visual","m")<CR>
-vnoremap <silent> <Plug>MagneditMoveVisualUp               :<C-U>call s:EditCodeFromCurrentPosition(v:count,"up","visual","m")<CR>
-vnoremap <silent> <Plug>MagneditCopyVisualDown             :<C-U>call s:EditCodeFromCurrentPosition(v:count,"down","visual","co")<CR>
-vnoremap <silent> <Plug>MagneditCopyVisualUp               :<C-U>call s:EditCodeFromCurrentPosition(v:count,"up","visual","co")<CR>
+nnoremap <silent> <Plug>MagneditDeleteLineDown             :<C-U>call <SID>EditCode(v:count,"down","line","d")<CR>
+nnoremap <silent> <Plug>MagneditDeleteLineUp               :<C-U>call <SID>EditCode(v:count,"up","line","d")<CR>
+nnoremap <silent> <Plug>MagneditDeleteParagraphDown        :<C-U>call <SID>EditCode(v:count,"down","outerparagraph","d")<CR>
+nnoremap <silent> <Plug>MagneditDeleteParagraphUp          :<C-U>call <SID>EditCode(v:count,"up","outerparagraph","d")<CR>
+nnoremap <silent> <Plug>MagneditCopyLineDown               :<C-U>call <SID>EditCode(v:count,"down","line","y")<CR>
+nnoremap <silent> <Plug>MagneditCopyLineUp                 :<C-U>call <SID>EditCode(v:count,"up","line","y")<CR>
+nnoremap <silent> <Plug>MagneditCopyParagraphDown          :<C-U>call <SID>EditCode(v:count,"down","outerparagraph","y")<CR>
+nnoremap <silent> <Plug>MagneditCopyParagraphUp            :<C-U>call <SID>EditCode(v:count,"up","outerparagraph","y")<CR>
+nnoremap <silent> <Plug>MagneditInsertEmptyLineDown        :<C-U>call <SID>EditCode(v:count,"down","line","pu! _")<CR>
+nnoremap <silent> <Plug>MagneditInsertEmptyLineUp          :<C-U>call <SID>EditCode(v:count,"up","line","pu! _")<CR>
+nnoremap <silent> <Plug>MagneditPasteDown                  :<C-U>call <SID>EditCode(v:count,"down","line","pu")<CR>
+nnoremap <silent> <Plug>MagneditPasteUp                    :<C-U>call <SID>EditCode(v:count,"up","line","pu")<CR>
+nnoremap <silent> <Plug>MagneditCommentLineDown            :<C-U>call <SID>EditCodeWithNormalMode(v:count,"down","gcc")<CR>
+nnoremap <silent> <Plug>MagneditCommentLineUp              :<C-U>call <SID>EditCodeWithNormalMode(v:count,"up","gcc")<CR>
+nnoremap <silent> <Plug>MagneditCommentParagraphDown       :<C-U>call <SID>EditCodeWithNormalMode(v:count,"down","gcap")<CR>
+nnoremap <silent> <Plug>MagneditCommentParagraphUp         :<C-U>call <SID>EditCodeWithNormalMode(v:count,"up","gcap")<CR>
+                                                                      
+nnoremap <silent> <Plug>MagneditMoveLineDownHere           :<C-U>call <SID>EditCode(v:count,"down","line","m.")<CR>
+nnoremap <silent> <Plug>MagneditMoveLineUpHere             :<C-U>call <SID>EditCode(v:count,"up","line","m.")<CR>
+nnoremap <silent> <Plug>MagneditMoveParagraphDownHere      :<C-U>call <SID>EditCode(v:count,"down","outerparagraph","m.")<CR>
+nnoremap <silent> <Plug>MagneditMoveParagraphUpHere        :<C-U>call <SID>EditCode(v:count,"up","outerparagraph","m.")<CR>
+                                                                      
+nnoremap <silent> <Plug>MagneditCopyLineDownHere           :<C-U>call <SID>EditCode(v:count,"down","line","co.")<CR>
+nnoremap <silent> <Plug>MagneditCopyLineUpHere             :<C-U>call <SID>EditCode(v:count,"up","line","co.")<CR>
+nnoremap <silent> <Plug>MagneditCopyParagraphDownHere      :<C-U>call <SID>EditCode(v:count,"down","outerparagraph","co.")<CR>
+nnoremap <silent> <Plug>MagneditCopyParagraphUpHere        :<C-U>call <SID>EditCode(v:count,"up","outerparagraph","co.")<CR>
+                                                                      
+nnoremap <silent> <Plug>MagneditMoveCurrentLineDown        :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"down","line","m")<CR>
+nnoremap <silent> <Plug>MagneditMoveCurrentLineUp          :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"up","line","m")<CR>
+nnoremap <silent> <Plug>MagneditMoveCurrentParagraphDown   :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"down","outerparagraph","m")<CR>
+nnoremap <silent> <Plug>MagneditMoveCurrentParagraphUp     :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"up","outerparagraph","m")<CR>
+                                                                      
+nnoremap <silent> <Plug>MagneditCopyCurrentLineDown        :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"down","line","co")<CR>
+nnoremap <silent> <Plug>MagneditCopyCurrentLineUp          :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"up","line","co")<CR>
+nnoremap <silent> <Plug>MagneditCopyCurrentParagraphDown   :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"down","outerparagraph","co")<CR>
+nnoremap <silent> <Plug>MagneditCopyCurrentParagraphUp     :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"up","outerparagraph","co")<CR>
+                                                                      
+vnoremap <silent> <Plug>MagneditMoveVisualDown             :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"down","visual","m")<CR>
+vnoremap <silent> <Plug>MagneditMoveVisualUp               :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"up","visual","m")<CR>
+vnoremap <silent> <Plug>MagneditCopyVisualDown             :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"down","visual","co")<CR>
+vnoremap <silent> <Plug>MagneditCopyVisualUp               :<C-U>call <SID>EditCodeFromCurrentPosition(v:count,"up","visual","co")<CR>
 
 if !exists("g:magnedit_no_mappings") || ! g:magnedit_no_mappings
     nmap dJ           <Plug>MagneditDeleteLineDown      
