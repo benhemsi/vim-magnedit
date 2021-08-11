@@ -8,6 +8,40 @@ It aims to offer all the line and paragraph editing commands you could want with
 
 The table below shows the default mappings and there really isn't anything else to it!
 
+The idea behind magnedit is very simple; to provide normal mode mappings for simple command mode editing commands. This allows for relative numbers to be used for these commands meaning much faster editing. For example, to delete a line 3 below the current line instead of calling `:+3d` you can call `3dJ` with the added bonus that your cursor remains in the same position so you can start the next command immediately. Magnedit offers mappings for the following command mode commands:
+
+| Command | Magnedit mapping |
+| ------- | ------- |
+| :d[elete]        | d |
+| :y[ank]          | y |
+| :pu[t]           | \<leader\>p (paste below), \<leader\>P (paste above) |
+| :m[ove]          | m (move line/paragraph to below current line), \<leader\>m (move current line/paragraph elsewhere) |
+| :co[py]          | c (copy line/paragraph to below current line), \<leader\>c (copy current line/paragraph elsewhere) |
+| o/O              | \<leader\>o, \<leader\>O |
+
+Examples:
+|                                              | 2dJ                                          | 4yK 3\<leader\>p                             | 3m[                                          | 2\<leader\>c]                                |
+|----------------------------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|
+|  4 the first fox jumped over the lazy dog    |  4 the first fox jumped over the lazy dog    |  4 the first fox jumped over the lazy dog    |  1 the third fox jumped over the lazy dog    |  4 the first fox jumped over the lazy dog    | 
+|  3 the second fox jumped over the lazy dog   |  3 the second fox jumped over the lazy dog   |  3 the second fox jumped over the lazy dog   | 5  the fourth fox\* jumped over the lazy dog |  3 the second fox jumped over the lazy dog   |
+|  2                                           |  2                                           |  2                                           |  1 the first fox jumped over the lazy dog    |  2                                           |
+|  1 the third fox jumped over the lazy dog    |  1 the third fox jumped over the lazy dog    |  1 the third fox jumped over the lazy dog    |  2 the second fox jumped over the lazy dog   |  1 the third fox jumped over the lazy dog    |
+| 5  the fourth fox\* jumped over the lazy dog | 5  the fourth fox\* jumped over the lazy dog | 5  the fourth fox\* jumped over the lazy dog |  3                                           | 5  the fourth fox jumped over the lazy dog   |
+|  1                                           |  1                                           |  1                                           |  4 the fifth fox jumped over the lazy dog    |  1                                           |
+|  2 the fifth fox jumped over the lazy dog    |  2 the sixth fox jumper over the lazy dog    |  2 the fifth fox jumped over the lazy dog    |  5 the sixth fox jumped over the lazy dog    |  2 the fifth fox jumped over the lazy dog    |
+|  3 the sixth fox jumped over the lazy dog    |                                              |  3 the sixth fox jumped over the lazy dog    |                                              |  3 the third fox jumped over the lazy dog    |
+|                                              |                                              |  4 the first fox jumped over the lazy dog    |                                              |  4 the fourth fox\* jumped over the lazy dog |
+|                                              |                                              |                                              |                                              |  5 the sixth fox jumped over the lazy dog    |
+                                                                                                                                                                                                 
+The four motion commands available are:
+
+| Command | Description |
+| ------- | ------- |
+| J | Line below |
+| K | Line above |
+| ] | Paragraph below |
+| [ | Paragraph above |
+
 ### Simple editing
 
 | Mapping | Command |
@@ -33,31 +67,31 @@ The table below shows the default mappings and there really isn't anything else 
 
 | Mapping | Command |
 | ------- | ------- |
-| \<count\>mJ             | Move line \<count\> below current line to current location 
-| \<count\>mK             | Move line \<count\> above current line to current location  
-| \<count\>m]             | Move paragraph \<count\> below current line to current location 
-| \<count\>m[             | Move paragraph \<count\> above current line to current location 
-| \<count\>\<leader\>mJ   | Move current line \<count\> lines downwards
-| \<count\>\<leader\>mK   | Move current line \<count\> lines upwards
-| \<count\>\<leader\>m]   | Move current paragraph \<count\> lines downwards
-| \<count\>\<leader\>m[   | Move current paragraph \<count\> lines upwards
-| \<count\>\<leader\>mJ   | Move current visual selection \<count\> lines downwards
-| \<count\>\<leader\>mK   | Move current visual selection \<count\> lines upwards
+| \<count\>mJ             | Move line \<count\> below current line to current location |
+| \<count\>mK             | Move line \<count\> above current line to current location  |
+| \<count\>m]             | Move paragraph \<count\> below current line to current location |
+| \<count\>m[             | Move paragraph \<count\> above current line to current location |
+| \<count\>\<leader\>mJ   | Move current line \<count\> lines downwards |
+| \<count\>\<leader\>mK   | Move current line \<count\> lines upwards |
+| \<count\>\<leader\>m]   | Move current paragraph \<count\> lines downwards |
+| \<count\>\<leader\>m[   | Move current paragraph \<count\> lines upwards |
+| \<count\>\<leader\>mJ   | Move current visual selection \<count\> lines downwards |
+| \<count\>\<leader\>mK   | Move current visual selection \<count\> lines upwards |
 
 ### Mappings for copying text
 
 | Mapping | Command |
 | ------- | ------- |
-| \<count\>cJ             | Copy line \<count\> below current line to current location 
-| \<count\>cK             | Copy line \<count\> above current line to current location  
-| \<count\>c]             | Copy paragraph \<count\> below current line to current location 
-| \<count\>c[             | Copy paragraph \<count\> above current line to current location 
-| \<count\>\<leader\>cJ   | Copy current line \<count\> lines downwards                      
-| \<count\>\<leader\>cK   | Copy current line \<count\> lines upwards
-| \<count\>\<leader\>c]   | Copy current paragraph \<count\> lines downwards
-| \<count\>\<leader\>c[   | Copy current paragraph \<count\> lines upwards
-| \<count\>\<leader\>cJ   | Copy current visual selection \<count\> lines downwards
-| \<count\>\<leader\>cK   | Copy current visual selection \<count\> lines upwards
+| \<count\>cJ             | Copy line \<count\> below current line to current location |
+| \<count\>cK             | Copy line \<count\> above current line to current location  |
+| \<count\>c]             | Copy paragraph \<count\> below current line to current location |
+| \<count\>c[             | Copy paragraph \<count\> above current line to current location |
+| \<count\>\<leader\>cJ   | Copy current line \<count\> lines downwards |
+| \<count\>\<leader\>cK   | Copy current line \<count\> lines upwards |
+| \<count\>\<leader\>c]   | Copy current paragraph \<count\> lines downwards |
+| \<count\>\<leader\>c[   | Copy current paragraph \<count\> lines upwards |
+| \<count\>\<leader\>cJ   | Copy current visual selection \<count\> lines downwards |
+| \<count\>\<leader\>cK   | Copy current visual selection \<count\> lines upwards |
 
 ### Installation
 
