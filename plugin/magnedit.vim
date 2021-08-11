@@ -11,20 +11,22 @@ let g:loaded_magnedit = 1
 function! s:EditCode(count,upOrDown,selection,editCommand)
     norm mz
     if a:upOrDown ==? "UP"
+        let targetLine = s:GetTargetLine(line(".") - a:count)
         if a:selection ==? "LINE"
-            let codeToEdit = line(".") - a:count
+            let codeToEdit = targetLine
         elseif a:selection ==? "INNERPARAGRAPH"
-            let codeToEdit = s:GetParagraphRange(line(".") - a:count,"inner")
+            let codeToEdit = s:GetParagraphRange(targetLine,"inner")
         elseif a:selection ==? "OUTERPARAGRAPH"
-            let codeToEdit = s:GetParagraphRange(line(".") - a:count,"outer")
+            let codeToEdit = s:GetParagraphRange(targetLine,"outer")
         endif
     else
+        let targetLine = s:GetTargetLine(line(".") + a:count)
         if a:selection ==? "LINE"
-            let codeToEdit = line(".") + a:count
+            let codeToEdit = targetLine
         elseif a:selection ==? "INNERPARAGRAPH"
-            let codeToEdit = s:GetParagraphRange(line(".") + a:count,"inner")
+            let codeToEdit = s:GetParagraphRange(targetLine,"inner")
         elseif a:selection ==? "OUTERPARAGRAPH"
-            let codeToEdit = s:GetParagraphRange(line(".") + a:count,"outer")
+            let codeToEdit = s:GetParagraphRange(targetLine,"outer")
         endif
     endif
     execute ":" . codeToEdit . a:editCommand
@@ -34,9 +36,9 @@ endfunction
 function! s:EditCodeWithNormalMode(count,upOrDown,editCommand)
     norm mz
     if a:upOrDown ==? "UP" 
-        let lineToMoveTo = line(".")-a:count
+        let lineToMoveTo = s:GetTargetLine(line(".") - a:count)
     elseif a:upOrDown ==? "DOWN"
-        let lineToMoveTo = line(".")+a:count
+        let lineToMoveTo = s:GetTargetLine(line(".") + a:count)
     endif
     call cursor(lineToMoveTo,0)
     execute "norm " . a:editCommand
@@ -54,9 +56,9 @@ function! s:EditCodeFromCurrentPosition(count,upOrDown,selection,editCommand)
         let codeToEdit = "'<,'>"
     endif
     if a:upOrDown ==? "UP"
-        let endLocation = "-" . a:count
+        let endLocation = " " . (s:GetTargetLine(line(".") - a:count) - 1)
     else
-        let endLocation = "+" . a:count
+        let endLocation = " " . s:GetTargetLine(line(".") + a:count)
     endif
     execute ":" . codeToEdit . a:editCommand . endLocation
 endfunction
@@ -93,6 +95,16 @@ function! s:GetParagraphRange(line,innerOrOuter)
     endif
     norm `z
     return startLine . "," . endLine
+endfunction
+
+function! s:GetTargetLine(line)
+    if a:line < 1
+        return 1
+    elseif a:line > line("$")
+        return line("$")
+    else
+        return a:line
+    endif
 endfunction
 
 nnoremap <silent> <Plug>MagneditDeleteLineDown             :<C-U>call <SID>EditCode(v:count,"down","line","d")<CR>
