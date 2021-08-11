@@ -1,6 +1,6 @@
 " Vim global plugin for long-range editing
 " Last Change:	2020 Aug 8
-" Maintainer:	Ben Hemsi <Bram@vim.org>
+" Maintainer:	Ben Hemsi <github.com/benhemsi>
 " License:	This file is placed in the public domain
                                                    
 if exists("g:loaded_magnedit")
@@ -103,10 +103,10 @@ nnoremap <silent> <Plug>MagneditCopyLineDown               :<C-U>call <SID>EditC
 nnoremap <silent> <Plug>MagneditCopyLineUp                 :<C-U>call <SID>EditCode(v:count,"up","line","y")<CR>
 nnoremap <silent> <Plug>MagneditCopyParagraphDown          :<C-U>call <SID>EditCode(v:count,"down","outerparagraph","y")<CR>
 nnoremap <silent> <Plug>MagneditCopyParagraphUp            :<C-U>call <SID>EditCode(v:count,"up","outerparagraph","y")<CR>
-nnoremap <silent> <Plug>MagneditInsertEmptyLineDown        :<C-U>call <SID>EditCode(v:count,"down","line","pu! _")<CR>
+nnoremap <silent> <Plug>MagneditInsertEmptyLineDown        :<C-U>call <SID>EditCode(v:count,"down","line","pu _")<CR>
 nnoremap <silent> <Plug>MagneditInsertEmptyLineUp          :<C-U>call <SID>EditCode(v:count,"up","line","pu! _")<CR>
 nnoremap <silent> <Plug>MagneditPasteDown                  :<C-U>call <SID>EditCode(v:count,"down","line","pu")<CR>
-nnoremap <silent> <Plug>MagneditPasteUp                    :<C-U>call <SID>EditCode(v:count,"up","line","pu")<CR>
+nnoremap <silent> <Plug>MagneditPasteUp                    :<C-U>call <SID>EditCode(v:count,"up","line","pu!")<CR>
 nnoremap <silent> <Plug>MagneditCommentLineDown            :<C-U>call <SID>EditCodeWithNormalMode(v:count,"down","gcc")<CR>
 nnoremap <silent> <Plug>MagneditCommentLineUp              :<C-U>call <SID>EditCodeWithNormalMode(v:count,"up","gcc")<CR>
 nnoremap <silent> <Plug>MagneditCommentParagraphDown       :<C-U>call <SID>EditCodeWithNormalMode(v:count,"down","gcap")<CR>
@@ -155,29 +155,29 @@ if !exists("g:magnedit_no_mappings") || ! g:magnedit_no_mappings
     nmap gc]          <Plug>MagneditCommentParagraphDown                                     
     nmap gc[          <Plug>MagneditCommentParagraphUp  
 
-    nmap mvj          <Plug>MagneditMoveLineDownHere       
-    nmap mvk          <Plug>MagneditMoveLineUpHere            
-    nmap mv]          <Plug>MagneditMoveParagraphDownHere  
-    nmap mv[          <Plug>MagneditMoveParagraphUpHere   
+    nmap mJ           <Plug>MagneditMoveLineDownHere       
+    nmap mK           <Plug>MagneditMoveLineUpHere            
+    nmap m]           <Plug>MagneditMoveParagraphDownHere  
+    nmap m[           <Plug>MagneditMoveParagraphUpHere   
                                                  
-    nmap cpj          <Plug>MagneditCopyLineDownHere      
-    nmap cpk          <Plug>MagneditCopyLineUpHere        
-    nmap cp]          <Plug>MagneditCopyParagraphDownHere     
-    nmap cp[          <Plug>MagneditCopyParagraphUpHere   
-                                                          
-    nmap <leader>mvj  <Plug>MagneditMoveCurrentLineDown     
-    nmap <leader>mvk  <Plug>MagneditMoveCurrentLineUp       
-    nmap <leader>mv]  <Plug>MagneditMoveCurrentParagraphDown
-    nmap <leader>mv[  <Plug>MagneditMoveCurrentParagraphUp              
+    nmap cJ           <Plug>MagneditCopyLineDownHere      
+    nmap cK           <Plug>MagneditCopyLineUpHere        
+    nmap c]           <Plug>MagneditCopyParagraphDownHere     
+    nmap c[           <Plug>MagneditCopyParagraphUpHere   
+
+    nmap <leader>mJ   <Plug>MagneditMoveCurrentLineDown       
+    nmap <leader>mK   <Plug>MagneditMoveCurrentLineUp       
+    nmap <leader>m]   <Plug>MagneditMoveCurrentParagraphDown
+    nmap <leader>m[   <Plug>MagneditMoveCurrentParagraphUp              
                                                             
-    nmap <leader>cpj  <Plug>MagneditCopyCurrentLineDown     
-    nmap <leader>cpk  <Plug>MagneditCopyCurrentLineUp       
-    nmap <leader>cp]  <Plug>MagneditCopyCurrentParagraphDown                                        
-    nmap <leader>cp[  <Plug>MagneditCopyCurrentParagraphUp                                        
+    nmap <leader>cJ   <Plug>MagneditCopyCurrentLineDown     
+    nmap <leader>cK   <Plug>MagneditCopyCurrentLineUp       
+    nmap <leader>c]   <Plug>MagneditCopyCurrentParagraphDown                                        
+    nmap <leader>c[   <Plug>MagneditCopyCurrentParagraphUp                                        
                                     
-    vmap mvj          <Plug>MagneditMoveVisualDown    
-    vmap mvk          <Plug>MagneditMoveVisualUp        
-    vmap cpj          <Plug>MagneditCopyVisualDown      
-    vmap cpk          <Plug>MagneditCopyVisualUp        
+    vmap <leader>mJ   <Plug>MagneditMoveVisualDown    
+    vmap <leader>mK   <Plug>MagneditMoveVisualUp        
+    vmap <leader>cJ   <Plug>MagneditCopyVisualDown      
+    vmap <leader>cK   <Plug>MagneditCopyVisualUp        
 endif                                            
 

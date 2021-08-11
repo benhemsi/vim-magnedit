@@ -9,6 +9,7 @@ It aims to offer all the line and paragraph editing commands you could want with
 The table below shows the default mappings and there really isn't anything else to it!
 
 ### Simple editing
+
 | Mapping | Command |
 | ------- | ------- |
 | \<count\>dJ             | Delete line \<count\> below current line |
@@ -29,29 +30,35 @@ The table below shows the default mappings and there really isn't anything else 
 | \<count\>gc[            | Toggle Commentary on paragraph \<count\> above current line (requires vim-commentary) |
 
 ### Mappings for moving text
+
 | Mapping | Command |
 | ------- | ------- |
-| \<count\>mvj            | Move line \<count\> below current line to current location 
-| \<count\>mvk            | Move line \<count\> above current line to current location  
-| \<count\>mv]            | Move paragraph \<count\> below current line to current location 
-| \<count\>mv[            | Move paragraph \<count\> above current line to current location 
-| \<count\>\<leader\>mvj  | Move current line \<count\> lines downwards
-| \<count\>\<leader\>mvk  | Move current line \<count\> lines upwards
-| \<count\>\<leader\>mv]  | Move current paragraph \<count\> lines downwards
-| \<count\>\<leader\>mv[  | Move current paragraph \<count\> lines upwards
-| \<count\>mvj            | Move current visual selection \<count\> lines downwards
-| \<count\>mvk            | Move current visual selection \<count\> lines upwards
+| \<count\>mJ             | Move line \<count\> below current line to current location 
+| \<count\>mK             | Move line \<count\> above current line to current location  
+| \<count\>m]             | Move paragraph \<count\> below current line to current location 
+| \<count\>m[             | Move paragraph \<count\> above current line to current location 
+| \<count\>\<leader\>mJ   | Move current line \<count\> lines downwards
+| \<count\>\<leader\>mK   | Move current line \<count\> lines upwards
+| \<count\>\<leader\>m]   | Move current paragraph \<count\> lines downwards
+| \<count\>\<leader\>m[   | Move current paragraph \<count\> lines upwards
+| \<count\>\<leader\>mJ   | Move current visual selection \<count\> lines downwards
+| \<count\>\<leader\>mK   | Move current visual selection \<count\> lines upwards
 
 ### Mappings for copying text
+
 | Mapping | Command |
 | ------- | ------- |
-| \<count\>cpj            | Copy line \<count\> below current line to current location 
-| \<count\>cpk            | Copy line \<count\> above current line to current location  
-| \<count\>cp]            | Copy paragraph \<count\> below current line to current location 
-| \<count\>cp[            | Copy paragraph \<count\> above current line to current location 
-| \<count\>\<leader\>cpj  | Copy current line \<count\> lines downwards                      
-| \<count\>\<leader\>cpk  | Copy current line \<count\> lines upwards
-| \<count\>\<leader\>cp]  | Copy current paragraph \<count\> lines downwards
-| \<count\>\<leader\>cp[  | Copy current paragraph \<count\> lines upwards
-| \<count\>cpj            | Copy current visual selection \<count\> lines downwards
-| \<count\>cpk            | Copy current visual selection \<count\> lines upwards
+| \<count\>cJ             | Copy line \<count\> below current line to current location 
+| \<count\>cK             | Copy line \<count\> above current line to current location  
+| \<count\>c]             | Copy paragraph \<count\> below current line to current location 
+| \<count\>c[             | Copy paragraph \<count\> above current line to current location 
+| \<count\>\<leader\>cJ   | Copy current line \<count\> lines downwards                      
+| \<count\>\<leader\>cK   | Copy current line \<count\> lines upwards
+| \<count\>\<leader\>c]   | Copy current paragraph \<count\> lines downwards
+| \<count\>\<leader\>c[   | Copy current paragraph \<count\> lines upwards
+| \<count\>\<leader\>cJ   | Copy current visual selection \<count\> lines downwards
+| \<count\>\<leader\>cK   | Copy current visual selection \<count\> lines upwards
+
+### Installation
+
+
