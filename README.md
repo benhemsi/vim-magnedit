@@ -20,20 +20,12 @@ The idea behind magnedit is very simple; to provide normal mode mappings for sim
 | o/O              | \<leader\>o, \<leader\>O |
 
 Examples:
-|                                              | 2dJ                                          | 4yK 3\<leader\>p                             | 3m[                                          | 2\<leader\>c]                                |
-|----------------------------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|
-|  4 the first fox jumped over the lazy dog    |  4 the first fox jumped over the lazy dog    |  4 the first fox jumped over the lazy dog    |  1 the third fox jumped over the lazy dog    |  4 the first fox jumped over the lazy dog    | 
-|  3 the second fox jumped over the lazy dog   |  3 the second fox jumped over the lazy dog   |  3 the second fox jumped over the lazy dog   | 5  the fourth fox\* jumped over the lazy dog |  3 the second fox jumped over the lazy dog   |
-|  2                                           |  2                                           |  2                                           |  1 the first fox jumped over the lazy dog    |  2                                           |
-|  1 the third fox jumped over the lazy dog    |  1 the third fox jumped over the lazy dog    |  1 the third fox jumped over the lazy dog    |  2 the second fox jumped over the lazy dog   |  1 the third fox jumped over the lazy dog    |
-| 5  the fourth fox\* jumped over the lazy dog | 5  the fourth fox\* jumped over the lazy dog | 5  the fourth fox\* jumped over the lazy dog |  3                                           | 5  the fourth fox jumped over the lazy dog   |
-|  1                                           |  1                                           |  1                                           |  4 the fifth fox jumped over the lazy dog    |  1                                           |
-|  2 the fifth fox jumped over the lazy dog    |  2 the sixth fox jumper over the lazy dog    |  2 the fifth fox jumped over the lazy dog    |  5 the sixth fox jumped over the lazy dog    |  2 the fifth fox jumped over the lazy dog    |
-|  3 the sixth fox jumped over the lazy dog    |                                              |  3 the sixth fox jumped over the lazy dog    |                                              |  3 the third fox jumped over the lazy dog    |
-|                                              |                                              |  4 the first fox jumped over the lazy dog    |                                              |  4 the fourth fox\* jumped over the lazy dog |
-|                                              |                                              |                                              |                                              |  5 the sixth fox jumped over the lazy dog    |
-                                                                                                                                                                                                 
-The four motion commands available are:
+| | |
+|              |  4 <span style="color:red">the first fox jumped over the lazy dog</span><br>3 <span style="color:orange">the second fox jumped over the lazy dog</span><br>2<br>1 <span style="color:green">the third fox jumped over the lazy dog</span><br>5 <span style="color:blue">the fourth fox\* jumped over the lazy dog</span><br>1<br>2 <span style="color:purple">the fifth fox jumped over the lazy dog</span><br>3 <span style="color:brown">the sixth fox jumped over the lazy dog</span>|
+| 2dJ          |  4 <span style="color:red">the first fox jumped over the lazy dog</span><br>3 <span style="color:orange">the second fox jumped over the lazy dog</span><br>2<br>1 <span style="color:green">the third fox jumped over the lazy dog</span><br>5  <span style="color:blue">the fourth fox\* jumped over the lazy dog</span><br>1<br>2 <span style="color:purple">the sixth fox jumper over the lazy dog</span>  | 
+| 4yK<br>3\<leader\>p  |  4 <span style="color:red">the first fox jumped over the lazy dog</span><br>3 <span style="color:orange">the second fox jumped over the lazy dog</span><br>2<br>1 <span style="color:green">the third fox jumped over the lazy dog</span><br>5  <span style="color:blue">the fourth fox\* jumped over the lazy dog</span><br>1<br>2 <span style="color:purple">the fifth fox jumped over the lazy dog</span><br>3 <span style="color:brown">the sixth fox jumped over the lazy dog</span><br>4 <span style="color:red">the first fox jumped over the lazy dog</span>       |
+| 3mv[         |  1 <span style="color:green">the third fox jumped over the lazy dog</span><br>2  <span style="color:blue">the fourth fox\* jumped over the lazy dog</span><br>1 <span style="color:red">the first fox jumped over the lazy dog</span><br>2 <span style="color:orange">the second fox jumped over the lazy dog</span><br>3<br>4 <span style="color:purple">the fifth fox jumped over the lazy dog</span><br>5 <span style="color:brown">the sixth fox jumped over the lazy dog</span>     |
+| 2cp]         |  4 <span style="color:red">the first fox jumped over the lazy dog</span><br>3 <span style="color:orange">the second fox jumped over the lazy dog</span><br>2<br>1 <span style="color:green">the third fox jumped over the lazy dog</span><br>5  <span style="color:blue">the fourth fox jumped over the lazy dog</span><br>1<br>2 <span style="color:purple">the fifth fox jumped over the lazy dog</span><br>3 <span style="color:brown">the third fox jumped over the lazy dog</span><br>4 <span style="color:green">the fourth fox\* jumped over the lazy dog</span><br>5 <span style="color:blue">the sixth fox jumped over the lazy dog</span>      |
 
 | Command | Description |
 | ------- | ------- |
@@ -67,31 +59,18 @@ The four motion commands available are:
 
 | Mapping | Command |
 | ------- | ------- |
-| \<count\>mJ             | Move line \<count\> below current line to current location |
-| \<count\>mK             | Move line \<count\> above current line to current location  |
-| \<count\>m]             | Move paragraph \<count\> below current line to current location |
-| \<count\>m[             | Move paragraph \<count\> above current line to current location |
-| \<count\>\<leader\>mJ   | Move current line \<count\> lines downwards |
-| \<count\>\<leader\>mK   | Move current line \<count\> lines upwards |
-| \<count\>\<leader\>m]   | Move current paragraph \<count\> lines downwards |
-| \<count\>\<leader\>m[   | Move current paragraph \<count\> lines upwards |
-| \<count\>\<leader\>mJ   | Move current visual selection \<count\> lines downwards |
-| \<count\>\<leader\>mK   | Move current visual selection \<count\> lines upwards |
-
-### Mappings for copying text
-
-| Mapping | Command |
-| ------- | ------- |
-| \<count\>cJ             | Copy line \<count\> below current line to current location |
-| \<count\>cK             | Copy line \<count\> above current line to current location  |
-| \<count\>c]             | Copy paragraph \<count\> below current line to current location |
-| \<count\>c[             | Copy paragraph \<count\> above current line to current location |
-| \<count\>\<leader\>cJ   | Copy current line \<count\> lines downwards |
-| \<count\>\<leader\>cK   | Copy current line \<count\> lines upwards |
-| \<count\>\<leader\>c]   | Copy current paragraph \<count\> lines downwards |
-| \<count\>\<leader\>c[   | Copy current paragraph \<count\> lines upwards |
-| \<count\>\<leader\>cJ   | Copy current visual selection \<count\> lines downwards |
-| \<count\>\<leader\>cK   | Copy current visual selection \<count\> lines upwards |
+| \<count\>mvj   | Move current line \<count\> lines downwards |
+| \<count\>mvk   | Move current line \<count\> lines upwards |
+| \<count\>mv]   | Move current paragraph \<count\> lines downwards |
+| \<count\>mv[   | Move current paragraph \<count\> lines upwards |
+| \<count\>mvj   | Move current visual selection \<count\> lines downwards |
+| \<count\>mvk   | Move current visual selection \<count\> lines upwards |
+| \<count\>cpj   | Copy current line \<count\> lines downwards |
+| \<count\>cpk   | Copy current line \<count\> lines upwards |
+| \<count\>cp]   | Copy current paragraph \<count\> lines downwards |
+| \<count\>cp[   | Copy current paragraph \<count\> lines upwards |
+| \<count\>cpj   | Copy current visual selection \<count\> lines downwards |
+| \<count\>cpk   | Copy current visual selection \<count\> lines upwards |
 
 ### Installation
 
