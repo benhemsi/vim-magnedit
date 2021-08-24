@@ -20,12 +20,13 @@ The idea behind magnedit is very simple; to provide normal mode mappings for sim
 | o/O              | \<leader\>o, \<leader\>O |
 
 Examples:
-| | |
-|              |  4 <span style="color:red">the first fox jumped over the lazy dog</span><br>3 <span style="color:orange">the second fox jumped over the lazy dog</span><br>2<br>1 <span style="color:green">the third fox jumped over the lazy dog</span><br>5 <span style="color:blue">the fourth fox\* jumped over the lazy dog</span><br>1<br>2 <span style="color:purple">the fifth fox jumped over the lazy dog</span><br>3 <span style="color:brown">the sixth fox jumped over the lazy dog</span>|
-| 2dJ          |  4 <span style="color:red">the first fox jumped over the lazy dog</span><br>3 <span style="color:orange">the second fox jumped over the lazy dog</span><br>2<br>1 <span style="color:green">the third fox jumped over the lazy dog</span><br>5  <span style="color:blue">the fourth fox\* jumped over the lazy dog</span><br>1<br>2 <span style="color:purple">the sixth fox jumper over the lazy dog</span>  | 
-| 4yK<br>3\<leader\>p  |  4 <span style="color:red">the first fox jumped over the lazy dog</span><br>3 <span style="color:orange">the second fox jumped over the lazy dog</span><br>2<br>1 <span style="color:green">the third fox jumped over the lazy dog</span><br>5  <span style="color:blue">the fourth fox\* jumped over the lazy dog</span><br>1<br>2 <span style="color:purple">the fifth fox jumped over the lazy dog</span><br>3 <span style="color:brown">the sixth fox jumped over the lazy dog</span><br>4 <span style="color:red">the first fox jumped over the lazy dog</span>       |
-| 3mv[         |  1 <span style="color:green">the third fox jumped over the lazy dog</span><br>2  <span style="color:blue">the fourth fox\* jumped over the lazy dog</span><br>1 <span style="color:red">the first fox jumped over the lazy dog</span><br>2 <span style="color:orange">the second fox jumped over the lazy dog</span><br>3<br>4 <span style="color:purple">the fifth fox jumped over the lazy dog</span><br>5 <span style="color:brown">the sixth fox jumped over the lazy dog</span>     |
-| 2cp]         |  4 <span style="color:red">the first fox jumped over the lazy dog</span><br>3 <span style="color:orange">the second fox jumped over the lazy dog</span><br>2<br>1 <span style="color:green">the third fox jumped over the lazy dog</span><br>5  <span style="color:blue">the fourth fox jumped over the lazy dog</span><br>1<br>2 <span style="color:purple">the fifth fox jumped over the lazy dog</span><br>3 <span style="color:brown">the third fox jumped over the lazy dog</span><br>4 <span style="color:green">the fourth fox\* jumped over the lazy dog</span><br>5 <span style="color:blue">the sixth fox jumped over the lazy dog</span>      |
+| Command | Text |
+|---|---|
+|              |  4 the first fox jumped over the lazy dog<br>3 the second fox jumped over the lazy dog<br>2<br>1 the third fox jumped over the lazy dog<br>5 the fourth fox\* jumped over the lazy dog<br>1<br>2 the fifth fox jumped over the lazy dog<br>3 the sixth fox jumped over the lazy dog|
+| 2dJ          |  4 the first fox jumped over the lazy dog<br>3 the second fox jumped over the lazy dog<br>2<br>1 the third fox jumped over the lazy dog<br>5  the fourth fox\* jumped over the lazy dog<br>1<br>2 the sixth fox jumped over the lazy dog  | 
+| 4yK<br>3\<leader\>p  |  4 the first fox jumped over the lazy dog<br>3 the second fox jumped over the lazy dog<br>2<br>1 the third fox jumped over the lazy dog<br>5  the fourth fox\* jumped over the lazy dog<br>1<br>2 the fifth fox jumped over the lazy dog<br>3 the sixth fox jumped over the lazy dog<br>4 the first fox jumped over the lazy dog       |
+| 3mv[         |  1 the third fox jumped over the lazy dog<br>2  the fourth fox\* jumped over the lazy dog<br>1 the first fox jumped over the lazy dog<br>2 the second fox jumped over the lazy dog<br>3<br>4 the fifth fox jumped over the lazy dog<br>5 the sixth fox jumped over the lazy dog     |
+| 2cp]         |  4 the first fox jumped over the lazy dog<br>3 the second fox jumped over the lazy dog<br>2<br>1 the third fox jumped over the lazy dog<br>5  the fourth fox jumped over the lazy dog<br>1<br>2 the fifth fox jumped over the lazy dog<br>3 the third fox jumped over the lazy dog<br>4 the fourth fox\* jumped over the lazy dog<br>5 the sixth fox jumped over the lazy dog      |
 
 | Command | Description |
 | ------- | ------- |
@@ -46,6 +47,14 @@ Examples:
 | \<count\>yK             | Yank line \<count\> above current line |
 | \<count\>y]             | Yank paragraph \<count\> below current line |
 | \<count\>y[             | Yank paragraph \<count\> above current line |
+| \<count\>dij\<object\>  | Delete the first inner \<object\> on the line \<count\> below current line |
+| \<count\>dik\<object\>  | Delete the first inner \<object\> on the line \<count\> above current line |
+| \<count\>yij\<object\>  | Yank the first inner \<object\> on the line \<count\> below current line |
+| \<count\>yik\<object\>  | Yank the first inner \<object\> on the line \<count\> above current line |
+| \<count\>daj\<object\>  | Delete the first \<object\> on the line \<count\> below current line |
+| \<count\>dak\<object\>  | Delete the first \<object\> on the line \<count\> above current line |
+| \<count\>yaj\<object\>  | Yank the first \<object\> on the line \<count\> below current line |
+| \<count\>yak\<object\>  | Yank the first \<object\> on the line \<count\> above current line |
 | \<count\>\<leader\>o    | Insert empty line \<count\> below current line |
 | \<count\>\<leader\>O    | Insert empty line \<count\> above current line |
 | \<count\>\<leader\>p    | Paste \<count\> below current line |
