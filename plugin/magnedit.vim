@@ -28,6 +28,7 @@ function! s:EditCodeWithParameter(count,editCommand,parameter)
 endfunction
 
 function! s:EditCodeFromCurrentPosition(count,selection,editCommand)
+    norm mq
     if a:selection ==? "LINE"
         let codeToEdit = line(".")
     elseif a:selection ==? "INNERPARAGRAPH"
@@ -39,6 +40,8 @@ function! s:EditCodeFromCurrentPosition(count,selection,editCommand)
     endif
     let endLocation = " " . s:GetTargetLine(line(".") + a:count)
     execute ":" . codeToEdit . a:editCommand . endLocation
+    norm `q
+    delm q
 endfunction
 
 function! s:GetParagraphRange(line,innerOrOuter)
