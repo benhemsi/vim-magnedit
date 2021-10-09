@@ -98,6 +98,16 @@ nnoremap <silent> <Plug>MagneditYankLineUp                 :<C-U>call <SID>EditC
 nnoremap <silent> <Plug>MagneditYankParagraphDown          :<C-U>call <SID>EditCode(v:count, 'norm "myap')<CR>
 nnoremap <silent> <Plug>MagneditYankParagraphUp            :<C-U>call <SID>EditCode(-v:count, 'norm "myap')<CR>
 
+nnoremap <silent> <Plug>MagneditInsertEmptyLineDown        :<C-U>call <SID>EditCode(v:count, "pu _")<CR>
+nnoremap <silent> <Plug>MagneditInsertEmptyLineUp          :<C-U>call <SID>EditCode(-v:count, "pu! _")<CR>
+nnoremap <silent> <Plug>MagneditPasteDown                  :<C-U>call <SID>EditCode(v:count, "pu")<CR>
+nnoremap <silent> <Plug>MagneditPasteUp                    :<C-U>call <SID>EditCode(-v:count, "pu!")<CR>
+
+nnoremap <silent> <Plug>MagneditCommentLineDown            :<C-U>call <SID>EditCode(v:count, "norm gcc")<CR>
+nnoremap <silent> <Plug>MagneditCommentLineUp              :<C-U>call <SID>EditCode(-v:count, "norm gcc")<CR>
+nnoremap <silent> <Plug>MagneditCommentParagraphDown       :<C-U>call <SID>EditCode(v:count, "norm gcip")<CR>
+nnoremap <silent> <Plug>MagneditCommentParagraphUp         :<C-U>call <SID>EditCode(-v:count, "norm gcip")<CR>
+
 nnoremap <silent> <Plug>MagneditMoveCurrentLineDown        :<C-U>call <SID>EditCodeFromCurrentPosition(v:count, "line", "m")<CR>
 nnoremap <silent> <Plug>MagneditMoveCurrentLineUp          :<C-U>call <SID>EditCodeFromCurrentPosition(-v:count, "line", "m")<CR>
 nnoremap <silent> <Plug>MagneditMoveCurrentParagraphDown   :<C-U>call <SID>EditCodeFromCurrentPosition(v:count, "outerparagraph", "m")<CR>
