@@ -28,7 +28,7 @@ function! s:EditCodeWithParameter(count,editCommand,parameter)
 endfunction
 
 function! s:EditCodeFromCurrentPosition(count,selection,editCommand)
-    norm mq
+    norm mx
     if a:selection ==? "LINE"
         let codeToEdit = line(".")
     elseif a:selection ==? "INNERPARAGRAPH"
@@ -40,8 +40,8 @@ function! s:EditCodeFromCurrentPosition(count,selection,editCommand)
     endif
     let endLocation = " " . s:GetTargetLine(line(".") + a:count)
     execute ":" . codeToEdit . a:editCommand . endLocation
-    norm `q
-    delm q
+    norm `x
+    delm x
 endfunction
 
 function! s:GetParagraphRange(line,innerOrOuter)
@@ -89,14 +89,14 @@ function! s:GetTargetLine(line)
     endif
 endfunction
 
-nnoremap <silent> <Plug>MagneditDeleteLineDown             :<C-U>call <SID>EditCode(v:count, "d")<CR>
-nnoremap <silent> <Plug>MagneditDeleteLineUp               :<C-U>call <SID>EditCode(-v:count, "d")<CR>
-nnoremap <silent> <Plug>MagneditDeleteParagraphDown        :<C-U>call <SID>EditCode(v:count, "norm dap")<CR>
-nnoremap <silent> <Plug>MagneditDeleteParagraphUp          :<C-U>call <SID>EditCode(-v:count, "norm dap")<CR>
-nnoremap <silent> <Plug>MagneditYankLineDown               :<C-U>call <SID>EditCode(v:count, "y")<CR>
-nnoremap <silent> <Plug>MagneditYankLineUp                 :<C-U>call <SID>EditCode(-v:count, "y")<CR>
-nnoremap <silent> <Plug>MagneditYankParagraphDown          :<C-U>call <SID>EditCode(v:count, "norm yap")<CR>
-nnoremap <silent> <Plug>MagneditYankParagraphUp            :<C-U>call <SID>EditCode(-v:count, "norm yap")<CR>
+nnoremap <silent> <Plug>MagneditDeleteLineDown             :<C-U>call <SID>EditCode(v:count, "d m")<CR>
+nnoremap <silent> <Plug>MagneditDeleteLineUp               :<C-U>call <SID>EditCode(-v:count, "d m")<CR>
+nnoremap <silent> <Plug>MagneditDeleteParagraphDown        :<C-U>call <SID>EditCode(v:count, 'norm "mdap')<CR>
+nnoremap <silent> <Plug>MagneditDeleteParagraphUp          :<C-U>call <SID>EditCode(-v:count, 'norm "mdap')<CR>
+nnoremap <silent> <Plug>MagneditYankLineDown               :<C-U>call <SID>EditCode(v:count, "y m")<CR>
+nnoremap <silent> <Plug>MagneditYankLineUp                 :<C-U>call <SID>EditCode(-v:count, "y m")<CR>
+nnoremap <silent> <Plug>MagneditYankParagraphDown          :<C-U>call <SID>EditCode(v:count, 'norm "myap')<CR>
+nnoremap <silent> <Plug>MagneditYankParagraphUp            :<C-U>call <SID>EditCode(-v:count, 'norm "myap')<CR>
 
 nnoremap <silent> <Plug>MagneditMoveCurrentLineDown        :<C-U>call <SID>EditCodeFromCurrentPosition(v:count, "line", "m")<CR>
 nnoremap <silent> <Plug>MagneditMoveCurrentLineUp          :<C-U>call <SID>EditCodeFromCurrentPosition(-v:count, "line", "m")<CR>
@@ -122,14 +122,14 @@ if !exists("g:magnedit_no_mappings") || ! g:magnedit_no_mappings
     nmap yK           <Plug>MagneditYankLineUp          
     nmap y]           <Plug>MagneditYankParagraphDown   
     nmap y[           <Plug>MagneditYankParagraphUp     
-    nnoremap <silent> dij      :<C-U>call <SID>EditCodeWithParameter(v:count, "norm di", getcharstr())<CR>
-    nnoremap <silent> daj      :<C-U>call <SID>EditCodeWithParameter(v:count, "norm da", getcharstr())<CR>
-    nnoremap <silent> yij      :<C-U>call <SID>EditCodeWithParameter(v:count, "norm yi", getcharstr())<CR>
-    nnoremap <silent> yaj      :<C-U>call <SID>EditCodeWithParameter(v:count, "norm ya", getcharstr())<CR>
-    nnoremap <silent> dik      :<C-U>call <SID>EditCodeWithParameter(-v:count, "norm di", getcharstr())<CR>
-    nnoremap <silent> dak      :<C-U>call <SID>EditCodeWithParameter(-v:count, "norm da", getcharstr())<CR>
-    nnoremap <silent> yik      :<C-U>call <SID>EditCodeWithParameter(-v:count, "norm yi", getcharstr())<CR>
-    nnoremap <silent> yak      :<C-U>call <SID>EditCodeWithParameter(-v:count, "norm ya", getcharstr())<CR>
+    nnoremap <silent> dij      :<C-U>call <SID>EditCodeWithParameter(v:count, 'norm "mdi', getcharstr())<CR>
+    nnoremap <silent> daj      :<C-U>call <SID>EditCodeWithParameter(v:count, 'norm "mda', getcharstr())<CR>
+    nnoremap <silent> yij      :<C-U>call <SID>EditCodeWithParameter(v:count, 'norm "myi', getcharstr())<CR>
+    nnoremap <silent> yaj      :<C-U>call <SID>EditCodeWithParameter(v:count, 'norm "mya', getcharstr())<CR>
+    nnoremap <silent> dik      :<C-U>call <SID>EditCodeWithParameter(-v:count, 'norm "mdi', getcharstr())<CR>
+    nnoremap <silent> dak      :<C-U>call <SID>EditCodeWithParameter(-v:count, 'norm "mda', getcharstr())<CR>
+    nnoremap <silent> yik      :<C-U>call <SID>EditCodeWithParameter(-v:count, 'norm "myi', getcharstr())<CR>
+    nnoremap <silent> yak      :<C-U>call <SID>EditCodeWithParameter(-v:count, 'norm "mya', getcharstr())<CR>
 
     nmap <leader>o    <Plug>MagneditInsertEmptyLineDown 
     nmap <leader>O    <Plug>MagneditInsertEmptyLineUp   
