@@ -119,10 +119,10 @@ nnoremap <Plug>MagneditCommentLineUp                  <Cmd>call <SID>EditCode(-v
 nnoremap <Plug>MagneditCommentParagraphDown           <Cmd>call <SID>EditCode(v:count, "norm gcip")<CR>
 nnoremap <Plug>MagneditCommentParagraphUp             <Cmd>call <SID>EditCode(-v:count, "norm gcip")<CR>
 
-nnoremap <Plug>MagneditMoveCurrentLineDown            <Cmd>call <SID>EditCodeFromCurrentPosition(v:count, "line", "m")<CR>
-nnoremap <Plug>MagneditMoveCurrentLineUp              <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count, "line", "m")<CR>
-nnoremap <Plug>MagneditMoveCurrentParagraphDown       <Cmd>call <SID>EditCodeFromCurrentPosition(v:count, "outerparagraph", "m")<CR>
-nnoremap <Plug>MagneditMoveCurrentParagraphUp         <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count, "outerparagraph", "m")<CR>
+nnoremap <Plug>MagneditMoveCurrentLineDown            <Cmd>call <SID>EditCodeFromCurrentPosition(v:count1, "line", "m")<CR>
+nnoremap <Plug>MagneditMoveCurrentLineUp              <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count1-1, "line", "m")<CR>
+nnoremap <Plug>MagneditMoveCurrentParagraphDown       <Cmd>call <SID>EditCodeFromCurrentPosition(v:count1, "outerparagraph", "m")<CR>
+nnoremap <Plug>MagneditMoveCurrentParagraphUp         <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count1-1, "outerparagraph", "m")<CR>
 
 nnoremap <Plug>MagneditCopyCurrentLineDown            <Cmd>call <SID>EditCodeFromCurrentPosition(v:count, "line", "co")<CR>
 nnoremap <Plug>MagneditCopyCurrentLineUp              <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count-1, "line", "co")<CR>
