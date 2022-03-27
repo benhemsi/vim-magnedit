@@ -144,15 +144,6 @@ if !exists("g:magnedit_no_mappings") || ! g:magnedit_no_mappings
   nmap y]           <Plug>MagneditYankParagraphDown
   nmap y[           <Plug>MagneditYankParagraphUp
 
-  nmap dij          <Plug>MagneditDeleteInnerObjectDown
-  nmap daj          <Plug>MagneditDeleteAObjectDown
-  nmap dik          <Plug>MagneditDeleteInnerObjectUp
-  nmap dak          <Plug>MagneditDeleteAObjectUp
-  nmap yij          <Plug>MagneditYankInnerObjectDown
-  nmap yaj          <Plug>MagneditYankAObjectDown
-  nmap yik          <Plug>MagneditYankInnerObjectUp
-  nmap yak          <Plug>MagneditYankAObjectUp
-
   nmap <leader>o    <Plug>MagneditInsertEmptyLineDown
   nmap <leader>O    <Plug>MagneditInsertEmptyLineUp
   nmap <leader>p    <Plug>MagneditPasteDown
@@ -177,5 +168,17 @@ if !exists("g:magnedit_no_mappings") || ! g:magnedit_no_mappings
   vmap mvk          <Plug>MagneditMoveVisualUp
   vmap cpj          <Plug>MagneditCopyVisualDown
   vmap cpk          <Plug>MagneditCopyVisualUp
+
+  if exists("g:magnedit_object_editing") && g:magnedit_object_editing
+    nmap dij          <Plug>MagneditDeleteInnerObjectDown
+    nmap daj          <Plug>MagneditDeleteAObjectDown
+    nmap dik          <Plug>MagneditDeleteInnerObjectUp
+    nmap dak          <Plug>MagneditDeleteAObjectUp
+    nmap yij          <Plug>MagneditYankInnerObjectDown
+    nmap yaj          <Plug>MagneditYankAObjectDown
+    nmap yik          <Plug>MagneditYankInnerObjectUp
+    nmap yak          <Plug>MagneditYankAObjectUp
+  endif
+
 endif
 
