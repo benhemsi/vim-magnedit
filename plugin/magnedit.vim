@@ -2,9 +2,9 @@
 " Last Change:	2020 Aug 8
 " Maintainer:	Ben Hemsi <github.com/benhemsi>
 " License:	This file is placed in the public domain
-                                                   
+
 if exists("g:loaded_magnedit")
-    finish
+  finish
 endif
 let g:loaded_magnedit = 1
 
@@ -14,81 +14,81 @@ let g:magnedit_yank_register = get(g:, 'magnedit_yank_register', "m")
 let g:magnedit_delete_register = get(g:, 'magnedit_delete_register', "n")
 
 function! s:EditCode(count,editCommand)
-    execute "norm m" . g:magnedit_primary_mark
-    let lineToMoveTo = s:GetTargetLine(line(".") + a:count)
-    call cursor(lineToMoveTo,0)
-    execute a:editCommand
-    execute "norm `" . g:magnedit_primary_mark
+  execute "norm m" . g:magnedit_primary_mark
+  let lineToMoveTo = s:GetTargetLine(line(".") + a:count)
+  call cursor(lineToMoveTo,0)
+  execute a:editCommand
+  execute "norm `" . g:magnedit_primary_mark
 endfunction
 
 function! s:EditCodeWithParameter(count,editCommand)
-    let object = getcharstr()
-    execute "norm m" . g:magnedit_primary_mark
-    let lineToMoveTo = s:GetTargetLine(line(".") + a:count)
-    call cursor(lineToMoveTo,0)
-    execute "norm f" . object
-    execute a:editCommand . object
-    execute "norm `" . g:magnedit_primary_mark
+  let object = getcharstr()
+  execute "norm m" . g:magnedit_primary_mark
+  let lineToMoveTo = s:GetTargetLine(line(".") + a:count)
+  call cursor(lineToMoveTo,0)
+  execute "norm f" . object
+  execute a:editCommand . object
+  execute "norm `" . g:magnedit_primary_mark
 endfunction
 
 function! s:EditCodeFromCurrentPosition(count,selection,editCommand)
-    execute "norm m" . g:magnedit_primary_mark
-    if a:selection ==? "LINE"
-        let codeToEdit = line(".")
-    elseif a:selection ==? "INNERPARAGRAPH"
-        let codeToEdit = s:GetParagraphRange(line("."),"inner")
-    elseif a:selection ==? "OUTERPARAGRAPH"
-        let codeToEdit = s:GetParagraphRange(line("."),"outer")
-    elseif a:selection ==? "VISUAL"
-        let codeToEdit = "'<,'>"
-    endif
-    let endLocation = " " . s:GetTargetLine(line(".") + a:count)
-    execute ":" . codeToEdit . a:editCommand . endLocation
-    execute "norm `" . g:magnedit_primary_mark
+  execute "norm m" . g:magnedit_primary_mark
+  if a:selection ==? "LINE"
+    let codeToEdit = line(".")
+  elseif a:selection ==? "INNERPARAGRAPH"
+    let codeToEdit = s:GetParagraphRange(line("."),"inner")
+  elseif a:selection ==? "OUTERPARAGRAPH"
+    let codeToEdit = s:GetParagraphRange(line("."),"outer")
+  elseif a:selection ==? "VISUAL"
+    let codeToEdit = "'<,'>"
+  endif
+  let endLocation = " " . s:GetTargetLine(line(".") + a:count)
+  execute ":" . codeToEdit . a:editCommand . endLocation
+  execute "norm `" . g:magnedit_primary_mark
 endfunction
 
 function! s:GetParagraphRange(line,innerOrOuter)
-    execute "norm m" . g:magnedit_secondary_mark
-    call cursor(a:line,0)
-    let startLineIsStart = (line("'{") == 1)
-    let lastLineIsEnd = (line("'}") == line("$"))
-    if startLineIsStart && lastLineIsEnd
-        let startLine = line("'{")
-        let endLine = line("'}")
-    elseif startLineIsStart
-        let startLine = line("'{")
-        if a:innerOrOuter ==? "INNER"
-            let endLine = line("'}") - 1
-        else 
-            let endLine = line("'}")
-        endif
-    elseif lastLineIsEnd
-        let endLine = line("'}")
-        if a:innerOrOuter ==? "INNER"
-            let startLine = line("'{") + 1
-        else 
-            let startLine = line("'{")
-        endif
+  execute "norm m" . g:magnedit_secondary_mark
+  call cursor(a:line,0)
+  let startLineIsStart = (line("'{") == 1)
+  let lastLineIsEnd = (line("'}") == line("$"))
+  if startLineIsStart && lastLineIsEnd
+    let startLine = line("'{")
+    let endLine = line("'}")
+  elseif startLineIsStart
+    let startLine = line("'{")
+    if a:innerOrOuter ==? "INNER"
+      let endLine = line("'}") - 1
     else
-        let startLine = line("'{") + 1
-        if a:innerOrOuter ==? "INNER"
-            let endLine = line("'}") - 1
-        else 
-            let endLine = line("'}")
-        endif
+      let endLine = line("'}")
     endif
-    execute "norm `" . g:magnedit_secondary_mark
-    return startLine . "," . endLine
+  elseif lastLineIsEnd
+    let endLine = line("'}")
+    if a:innerOrOuter ==? "INNER"
+      let startLine = line("'{") + 1
+    else
+      let startLine = line("'{")
+    endif
+  else
+    let startLine = line("'{") + 1
+    if a:innerOrOuter ==? "INNER"
+      let endLine = line("'}") - 1
+    else
+      let endLine = line("'}")
+    endif
+  endif
+  execute "norm `" . g:magnedit_secondary_mark
+  return startLine . "," . endLine
 endfunction
 
 function! s:GetTargetLine(line)
-    if a:line < 1
-        return 1
-    elseif a:line > line("$")
-        return line("$")
-    else
-        return a:line
-    endif
+  if a:line < 1
+    return 1
+  elseif a:line > line("$")
+    return line("$")
+  else
+    return a:line
+  endif
 endfunction
 
 nnoremap <Plug>MagneditDeleteLineDown                 <Cmd>call <SID>EditCode(v:count, "d " . g:magnedit_delete_register)<CR>
@@ -119,10 +119,10 @@ nnoremap <Plug>MagneditCommentLineUp                  <Cmd>call <SID>EditCode(-v
 nnoremap <Plug>MagneditCommentParagraphDown           <Cmd>call <SID>EditCode(v:count, "norm gcip")<CR>
 nnoremap <Plug>MagneditCommentParagraphUp             <Cmd>call <SID>EditCode(-v:count, "norm gcip")<CR>
 
-nnoremap <Plug>MagneditMoveCurrentLineDown            <Cmd>call <SID>EditCodeFromCurrentPosition(v:count1, "line", "m")<CR>
-nnoremap <Plug>MagneditMoveCurrentLineUp              <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count1-1, "line", "m")<CR>
-nnoremap <Plug>MagneditMoveCurrentParagraphDown       <Cmd>call <SID>EditCodeFromCurrentPosition(v:count1, "outerparagraph", "m")<CR>
-nnoremap <Plug>MagneditMoveCurrentParagraphUp         <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count1-1, "outerparagraph", "m")<CR>
+nnoremap <Plug>MagneditMoveCurrentLineDown            <Cmd>call <SID>EditCodeFromCurrentPosition(v:count, "line", "m")<CR>
+nnoremap <Plug>MagneditMoveCurrentLineUp              <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count, "line", "m")<CR>
+nnoremap <Plug>MagneditMoveCurrentParagraphDown       <Cmd>call <SID>EditCodeFromCurrentPosition(v:count, "outerparagraph", "m")<CR>
+nnoremap <Plug>MagneditMoveCurrentParagraphUp         <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count, "outerparagraph", "m")<CR>
 
 nnoremap <Plug>MagneditCopyCurrentLineDown            <Cmd>call <SID>EditCodeFromCurrentPosition(v:count, "line", "co")<CR>
 nnoremap <Plug>MagneditCopyCurrentLineUp              <Cmd>call <SID>EditCodeFromCurrentPosition(-v:count-1, "line", "co")<CR>
@@ -135,47 +135,47 @@ vnoremap <Plug>MagneditCopyVisualDown                 :<C-U>call <SID>EditCodeFr
 vnoremap <Plug>MagneditCopyVisualUp                   :<C-U>call <SID>EditCodeFromCurrentPosition(-v:count1-1, "visual", "co")<CR>
 
 if !exists("g:magnedit_no_mappings") || ! g:magnedit_no_mappings
-    nmap dJ           <Plug>MagneditDeleteLineDown      
-    nmap dK           <Plug>MagneditDeleteLineUp        
-    nmap d]           <Plug>MagneditDeleteParagraphDown 
-    nmap d[           <Plug>MagneditDeleteParagraphUp 
-    nmap yJ           <Plug>MagneditYankLineDown        
-    nmap yK           <Plug>MagneditYankLineUp          
-    nmap y]           <Plug>MagneditYankParagraphDown   
-    nmap y[           <Plug>MagneditYankParagraphUp     
+  nmap dJ           <Plug>MagneditDeleteLineDown
+  nmap dK           <Plug>MagneditDeleteLineUp
+  nmap d]           <Plug>MagneditDeleteParagraphDown
+  nmap d[           <Plug>MagneditDeleteParagraphUp
+  nmap yJ           <Plug>MagneditYankLineDown
+  nmap yK           <Plug>MagneditYankLineUp
+  nmap y]           <Plug>MagneditYankParagraphDown
+  nmap y[           <Plug>MagneditYankParagraphUp
 
-    nmap dij          <Plug>MagneditDeleteInnerObjectDown
-    nmap daj          <Plug>MagneditDeleteAObjectDown
-    nmap dik          <Plug>MagneditDeleteInnerObjectUp
-    nmap dak          <Plug>MagneditDeleteAObjectUp
-    nmap yij          <Plug>MagneditYankInnerObjectDown
-    nmap yaj          <Plug>MagneditYankAObjectDown
-    nmap yik          <Plug>MagneditYankInnerObjectUp
-    nmap yak          <Plug>MagneditYankAObjectUp
+  nmap dij          <Plug>MagneditDeleteInnerObjectDown
+  nmap daj          <Plug>MagneditDeleteAObjectDown
+  nmap dik          <Plug>MagneditDeleteInnerObjectUp
+  nmap dak          <Plug>MagneditDeleteAObjectUp
+  nmap yij          <Plug>MagneditYankInnerObjectDown
+  nmap yaj          <Plug>MagneditYankAObjectDown
+  nmap yik          <Plug>MagneditYankInnerObjectUp
+  nmap yak          <Plug>MagneditYankAObjectUp
 
-    nmap <leader>o    <Plug>MagneditInsertEmptyLineDown 
-    nmap <leader>O    <Plug>MagneditInsertEmptyLineUp   
-    nmap <leader>p    <Plug>MagneditPasteDown
-    nmap <leader>P    <Plug>MagneditPasteUp  
+  nmap <leader>o    <Plug>MagneditInsertEmptyLineDown
+  nmap <leader>O    <Plug>MagneditInsertEmptyLineUp
+  nmap <leader>p    <Plug>MagneditPasteDown
+  nmap <leader>P    <Plug>MagneditPasteUp
 
-    nmap gcJ          <Plug>MagneditCommentLineDown     
-    nmap gcK          <Plug>MagneditCommentLineUp       
-    nmap gc]          <Plug>MagneditCommentParagraphDown                                     
-    nmap gc[          <Plug>MagneditCommentParagraphUp  
+  nmap gcJ          <Plug>MagneditCommentLineDown
+  nmap gcK          <Plug>MagneditCommentLineUp
+  nmap gc]          <Plug>MagneditCommentParagraphDown
+  nmap gc[          <Plug>MagneditCommentParagraphUp
 
-    nmap mvj          <Plug>MagneditMoveCurrentLineDown       
-    nmap mvk          <Plug>MagneditMoveCurrentLineUp       
-    nmap mv]          <Plug>MagneditMoveCurrentParagraphDown
-    nmap mv[          <Plug>MagneditMoveCurrentParagraphUp              
-                                                           
-    nmap cpj          <Plug>MagneditCopyCurrentLineDown     
-    nmap cpk          <Plug>MagneditCopyCurrentLineUp       
-    nmap cp]          <Plug>MagneditCopyCurrentParagraphDown                                        
-    nmap cp[          <Plug>MagneditCopyCurrentParagraphUp                                        
-                                   
-    vmap mvj          <Plug>MagneditMoveVisualDown    
-    vmap mvk          <Plug>MagneditMoveVisualUp        
-    vmap cpj          <Plug>MagneditCopyVisualDown      
-    vmap cpk          <Plug>MagneditCopyVisualUp        
-endif                                            
+  nmap mvj          <Plug>MagneditMoveCurrentLineDown
+  nmap mvk          <Plug>MagneditMoveCurrentLineUp
+  nmap mv]          <Plug>MagneditMoveCurrentParagraphDown
+  nmap mv[          <Plug>MagneditMoveCurrentParagraphUp
+
+  nmap cpj          <Plug>MagneditCopyCurrentLineDown
+  nmap cpk          <Plug>MagneditCopyCurrentLineUp
+  nmap cp]          <Plug>MagneditCopyCurrentParagraphDown
+  nmap cp[          <Plug>MagneditCopyCurrentParagraphUp
+
+  vmap mvj          <Plug>MagneditMoveVisualDown
+  vmap mvk          <Plug>MagneditMoveVisualUp
+  vmap cpj          <Plug>MagneditCopyVisualDown
+  vmap cpk          <Plug>MagneditCopyVisualUp
+endif
 
