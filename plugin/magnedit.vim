@@ -8,31 +8,29 @@ if exists("g:loaded_magnedit")
 endif
 let g:loaded_magnedit = 1
 
-let g:magnedit_primary_mark = get(g:, 'magnedit_primary_mark', "M")
-let g:magnedit_secondary_mark = get(g:, 'magnedit_secondary_mark', "n")
 let g:magnedit_yank_register = get(g:, 'magnedit_yank_register', "m")
 let g:magnedit_delete_register = get(g:, 'magnedit_delete_register', "n")
 
 function! s:EditCode(count,editCommand)
-  execute "norm m" . g:magnedit_primary_mark
+  let startingPosition = getcurpos()
   let lineToMoveTo = s:GetTargetLine(line(".") + a:count)
   call cursor(lineToMoveTo,0)
   execute a:editCommand
-  execute "norm `" . g:magnedit_primary_mark
+  call cursor(startingPosition[1], startingPosition[2])
 endfunction
 
 function! s:EditCodeWithParameter(count,editCommand)
   let object = getcharstr()
-  execute "norm m" . g:magnedit_primary_mark
+  let startingPosition = getcurpos()
   let lineToMoveTo = s:GetTargetLine(line(".") + a:count)
   call cursor(lineToMoveTo,0)
   execute "norm f" . object
   execute a:editCommand . object
-  execute "norm `" . g:magnedit_primary_mark
+  call cursor(startingPosition[1], startingPosition[2])
 endfunction
 
 function! s:EditCodeFromCurrentPosition(count,selection,editCommand)
-  execute "norm m" . g:magnedit_primary_mark
+  let startingPosition = getcurpos()
   if a:selection ==? "LINE"
     let codeToEdit = line(".")
   elseif a:selection ==? "INNERPARAGRAPH"
@@ -44,11 +42,11 @@ function! s:EditCodeFromCurrentPosition(count,selection,editCommand)
   endif
   let endLocation = " " . s:GetTargetLine(line(".") + a:count)
   execute ":" . codeToEdit . a:editCommand . endLocation
-  execute "norm `" . g:magnedit_primary_mark
+  call cursor(startingPosition[1], startingPosition[2])
 endfunction
 
 function! s:GetParagraphRange(line,innerOrOuter)
-  execute "norm m" . g:magnedit_secondary_mark
+  let startingPosition = getcurpos()
   call cursor(a:line,0)
   let startLineIsStart = (line("'{") == 1)
   let lastLineIsEnd = (line("'}") == line("$"))
@@ -77,7 +75,7 @@ function! s:GetParagraphRange(line,innerOrOuter)
       let endLine = line("'}")
     endif
   endif
-  execute "norm `" . g:magnedit_secondary_mark
+  call cursor(startingPosition[1], startingPosition[2])
   return startLine . "," . endLine
 endfunction
 
