@@ -23,7 +23,6 @@ function! s:editCode(count,editCommand,repeatMapping)
 endfunction
 
 function! s:editCodeFromCurrentPosition(count,selection,editCommand,repeatMapping)
-  let startingPosition = getcurpos()
   if a:selection ==? "LINE"
     let codeToEdit = line(".")
   elseif a:selection ==? "INNERPARAGRAPH"
@@ -35,7 +34,6 @@ function! s:editCodeFromCurrentPosition(count,selection,editCommand,repeatMappin
   endif
   let endLocation = " " . s:getTargetLine(line(".") + a:count)
   execute ":" . codeToEdit . a:editCommand . endLocation
-  call cursor(startingPosition[1], startingPosition[2])
   silent! call repeat#set("\<Plug>Magnedit" . a:repeatMapping, v:count)
 endfunction
 
