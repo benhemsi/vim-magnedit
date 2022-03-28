@@ -10,6 +10,8 @@ let g:loaded_magnedit = 1
 
 let g:magnedit_yank_register = get(g:, 'magnedit_yank_register', "m")
 let g:magnedit_delete_register = get(g:, 'magnedit_delete_register', "n")
+let g:magnedit_commentary = get(g:, 'magnedit_commentary', "gc")
+let g:magnedit_commentary_line = get(g:, 'magnedit_commentary_line', "gcc")
 
 function! s:editCode(count,editCommand,repeatMapping)
   let startingPosition = getcurpos()
@@ -104,10 +106,10 @@ nnoremap <Plug>MagneditInsertEmptyLineUp              <Cmd>call <SID>editCode(-v
 nnoremap <Plug>MagneditPasteDown                      <Cmd>call <SID>editCode(v:count, "pu", "PasteDown")<CR>
 nnoremap <Plug>MagneditPasteUp                        <Cmd>call <SID>editCode(-v:count, "pu!", "PasteUp")<CR>
 
-nnoremap <Plug>MagneditCommentLineDown                <Cmd>call <SID>editCode(v:count, "norm gcc", "CommentLineDown")<CR>
-nnoremap <Plug>MagneditCommentLineUp                  <Cmd>call <SID>editCode(-v:count, "norm gcc", "CommentLineUp")<CR>
-nnoremap <Plug>MagneditCommentParagraphDown           <Cmd>call <SID>editCode(v:count, "norm gcip", "CommentParagraphDown")<CR>
-nnoremap <Plug>MagneditCommentParagraphUp             <Cmd>call <SID>editCode(-v:count, "norm gcip", "CommentParagraphUp")<CR>
+nnoremap <Plug>MagneditCommentLineDown                <Cmd>call <SID>editCode(v:count, "norm " . g:magnedit_commentary_line, "CommentLineDown")<CR>
+nnoremap <Plug>MagneditCommentLineUp                  <Cmd>call <SID>editCode(-v:count, "norm " . g:magnedit_commentary_line, "CommentLineUp")<CR>
+nnoremap <Plug>MagneditCommentParagraphDown           <Cmd>call <SID>editCode(v:count, "norm " . g:magnedit_commentary . "ip", "CommentParagraphDown")<CR>
+nnoremap <Plug>MagneditCommentParagraphUp             <Cmd>call <SID>editCode(-v:count, "norm " . g:magnedit_commentary . "ip", "CommentParagraphUp")<CR>
 
 nnoremap <Plug>MagneditMoveCurrentLineDown            <Cmd>call <SID>editCodeFromCurrentPosition(v:count1, "line", "m", "MoveCurrentLineDown")<CR>
 nnoremap <Plug>MagneditMoveCurrentLineUp              <Cmd>call <SID>editCodeFromCurrentPosition(-v:count1-1, "line", "m", "MoveCurrentLineUp")<CR>
