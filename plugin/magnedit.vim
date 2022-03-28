@@ -20,17 +20,6 @@ function! s:editCode(count,editCommand,repeatMapping)
   silent! call repeat#set("\<Plug>Magnedit" . a:repeatMapping, v:count)
 endfunction
 
-function! s:editCodeWithParameter(count,editCommand,repeatMapping)
-  let object = getcharstr()
-  let startingPosition = getcurpos()
-  let lineToMoveTo = s:getTargetLine(line(".") + a:count)
-  call cursor(lineToMoveTo,0)
-  execute "norm f" . object
-  execute a:editCommand . object
-  call cursor(startingPosition[1], startingPosition[2])
-  silent! call repeat#set("\<Plug>Magnedit" . a:repeatMapping, v:count)
-endfunction
-
 function! s:editCodeFromCurrentPosition(count,selection,editCommand,repeatMapping)
   let startingPosition = getcurpos()
   if a:selection ==? "LINE"
@@ -44,6 +33,17 @@ function! s:editCodeFromCurrentPosition(count,selection,editCommand,repeatMappin
   endif
   let endLocation = " " . s:getTargetLine(line(".") + a:count)
   execute ":" . codeToEdit . a:editCommand . endLocation
+  call cursor(startingPosition[1], startingPosition[2])
+  silent! call repeat#set("\<Plug>Magnedit" . a:repeatMapping, v:count)
+endfunction
+
+function! s:editCodeWithParameter(count,editCommand,repeatMapping)
+  let object = getcharstr()
+  let startingPosition = getcurpos()
+  let lineToMoveTo = s:getTargetLine(line(".") + a:count)
+  call cursor(lineToMoveTo,0)
+  execute "norm f" . object
+  execute a:editCommand . object
   call cursor(startingPosition[1], startingPosition[2])
   silent! call repeat#set("\<Plug>Magnedit" . a:repeatMapping, v:count)
 endfunction
@@ -104,15 +104,6 @@ nnoremap <Plug>MagneditInsertEmptyLineUp              <Cmd>call <SID>editCode(-v
 nnoremap <Plug>MagneditPasteDown                      <Cmd>call <SID>editCode(v:count, "pu", "PasteDown")<CR>
 nnoremap <Plug>MagneditPasteUp                        <Cmd>call <SID>editCode(-v:count, "pu!", "PasteUp")<CR>
 
-nnoremap <Plug>MagneditDeleteInnerObjectDown          <Cmd>call <SID>editCodeWithParameter(v:count, 'norm "' . g:magnedit_delete_register . 'di', "DeleteInnerObjectDown")<CR>
-nnoremap <Plug>MagneditDeleteAObjectDown              <Cmd>call <SID>editCodeWithParameter(v:count, 'norm "' . g:magnedit_delete_register . 'da', "DeleteAObjectDown")<CR>
-nnoremap <Plug>MagneditDeleteInnerObjectUp            <Cmd>call <SID>editCodeWithParameter(-v:count, 'norm "' . g:magnedit_delete_register . 'di', "DeleteInnerObjectUp")<CR>
-nnoremap <Plug>MagneditDeleteAObjectUp                <Cmd>call <SID>editCodeWithParameter(-v:count, 'norm "' . g:magnedit_delete_register . 'da', "DeleteAObjectUp")<CR>
-nnoremap <Plug>MagneditYankInnerObjectDown            <Cmd>call <SID>editCodeWithParameter(v:count, 'norm "' . g:magnedit_yank_register . 'yi', "YankInnerObjectDown")<CR>
-nnoremap <Plug>MagneditYankAObjectDown                <Cmd>call <SID>editCodeWithParameter(v:count, 'norm "' . g:magnedit_yank_register . 'ya', "YankAObjectDown")<CR>
-nnoremap <Plug>MagneditYankInnerObjectUp              <Cmd>call <SID>editCodeWithParameter(-v:count, 'norm "' . g:magnedit_yank_register . 'yi', "YankInnerObjectUp")<CR>
-nnoremap <Plug>MagneditYankAObjectUp                  <Cmd>call <SID>editCodeWithParameter(-v:count, 'norm "' . g:magnedit_yank_register . 'ya', "YankAObjectUp")<CR>
-
 nnoremap <Plug>MagneditCommentLineDown                <Cmd>call <SID>editCode(v:count, "norm gcc", "CommentLineDown")<CR>
 nnoremap <Plug>MagneditCommentLineUp                  <Cmd>call <SID>editCode(-v:count, "norm gcc", "CommentLineUp")<CR>
 nnoremap <Plug>MagneditCommentParagraphDown           <Cmd>call <SID>editCode(v:count, "norm gcip", "CommentParagraphDown")<CR>
@@ -132,6 +123,16 @@ vnoremap <Plug>MagneditMoveVisualDown                 :<C-U>call <SID>editCodeFr
 vnoremap <Plug>MagneditMoveVisualUp                   :<C-U>call <SID>editCodeFromCurrentPosition(-v:count1-1, "visual", "m", "MoveVisualUp")<CR>
 vnoremap <Plug>MagneditCopyVisualDown                 :<C-U>call <SID>editCodeFromCurrentPosition(v:count1, "visual", "co", "CopyVisualDown")<CR>
 vnoremap <Plug>MagneditCopyVisualUp                   :<C-U>call <SID>editCodeFromCurrentPosition(-v:count1-1, "visual", "co", "CopyVisualUp")<CR>
+
+nnoremap <Plug>MagneditDeleteInnerObjectDown          <Cmd>call <SID>editCodeWithParameter(v:count, 'norm "' . g:magnedit_delete_register . 'di', "DeleteInnerObjectDown")<CR>
+nnoremap <Plug>MagneditDeleteAObjectDown              <Cmd>call <SID>editCodeWithParameter(v:count, 'norm "' . g:magnedit_delete_register . 'da', "DeleteAObjectDown")<CR>
+nnoremap <Plug>MagneditDeleteInnerObjectUp            <Cmd>call <SID>editCodeWithParameter(-v:count, 'norm "' . g:magnedit_delete_register . 'di', "DeleteInnerObjectUp")<CR>
+nnoremap <Plug>MagneditDeleteAObjectUp                <Cmd>call <SID>editCodeWithParameter(-v:count, 'norm "' . g:magnedit_delete_register . 'da', "DeleteAObjectUp")<CR>
+
+nnoremap <Plug>MagneditYankInnerObjectDown            <Cmd>call <SID>editCodeWithParameter(v:count, 'norm "' . g:magnedit_yank_register . 'yi', "YankInnerObjectDown")<CR>
+nnoremap <Plug>MagneditYankAObjectDown                <Cmd>call <SID>editCodeWithParameter(v:count, 'norm "' . g:magnedit_yank_register . 'ya', "YankAObjectDown")<CR>
+nnoremap <Plug>MagneditYankInnerObjectUp              <Cmd>call <SID>editCodeWithParameter(-v:count, 'norm "' . g:magnedit_yank_register . 'yi', "YankInnerObjectUp")<CR>
+nnoremap <Plug>MagneditYankAObjectUp                  <Cmd>call <SID>editCodeWithParameter(-v:count, 'norm "' . g:magnedit_yank_register . 'ya', "YankAObjectUp")<CR>
 
 if !exists("g:magnedit_no_mappings") || ! g:magnedit_no_mappings
   nmap dJ           <Plug>MagneditDeleteLineDown
